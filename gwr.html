@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+
+<style>
+
+	*, :before, :after {
+		box-sizing : border-box;
+	}
+	ul {
+		list-style : none;
+		padding : 0;
+		margin : 0;
+	}
+
+
+	[data-menu] {
+		position : relative;
+	}
+	[data-menu-items] {
+		width : 100%;
+
+		background-color : lightblue;
+	}
+	[data-menu-items] li > span,
+	[data-menu-items] li > a {
+		display : inline-block;
+		padding : 12px 24px;
+
+
+
+	}
+	.root:after {
+		content : '';
+		display : block;
+		clear : both;
+	}
+	.root > li {
+		float : left;
+	}
+
+	[data-menu=alpha] > [data-menu-items] {
+		opacity : 0;
+		position : absolute;
+		left : 0;
+		top : 100%;
+		z-index : 1;
+		transition : all 0.2s linear;
+	}
+	[data-menu=alpha].isActive > [data-menu-items]{
+		opacity : 1;
+	}
+	[data-menu=gamma] > [data-menu-items] {
+		opacity : 0;
+		position : absolute;
+		top : 0;
+		left : 100%;
+		transition : all 0.2s linear;
+		z-index : 0;
+	}
+	.isActive[data-menu=gamma] > [data-menu-items] {
+		opacity : 1;
+
+	}
+
+	[data-menu=gamma] > [data-menu-items] li {
+		position : relative;
+		overflow : hidden;
+	}
+
+	[data-menu=gamma] > [data-menu-items] li a {
+		margin-left : -100px;
+		transition : all 0.2s linear;
+
+
+	}
+
+	.isActive[data-menu=gamma] > [data-menu-items] li a {
+		margin-left : 0;
+	}
+
+
+
+</style>
+</head>
+<body>
+<div id="menu">
+	<ul class="root" data-menu-items>
+		<li data-menu="alpha">
+			<span data-menu-trigger>alpha</span>
+			<ul class="red" data-menu-items>
+				<li data-menu="gamma">
+					<span data-menu-trigger>one</span>
+					<ul data-menu-items >
+						<li><a href='#'>alph</a></li>
+						<li><a href='#'>beta</a></li>
+						<li><a href='#'>gamma</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href='#'>beta</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href='#'>beta</a>
+		</li>
+	</ul>
+</div>
+<p>
+
+	Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+	doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+	veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
+	ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+	consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+	Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, a
+</p>
+	<script type='text/javascript' src="/navbar/main.js"></script>
+</body>
+</html>
