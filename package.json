@@ -1,0 +1,26 @@
+{
+  "name": "navbar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Richardinho/brentano.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Richardinho/brentano/issues"
+  },
+  "homepage": "https://github.com/Richardinho/brentano#readme",
+  "devDependencies": {
+    "express": "^4.13.3"
+  }
+}

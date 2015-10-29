@@ -23,27 +23,26 @@ function init(config) {
 	}
 
 	function handleTrigger(menu, event) {
-		menu.classList.add('isActive');
+		menu.classList.toggle('isActive');
 	}
 
 	function bindEventsToMenu(menu) {
-		menu.addEventListener('mouseleave', mouseLeaveMenu, false);
-		menu.querySelector('[data-menu-trigger]').addEventListener('mouseover', handleTrigger.bind(null, menu), false);
+		menu.querySelector('[data-menu-trigger]').addEventListener('click', handleTrigger.bind(null, menu), false);
 	}
 
 	function mouseLeaveMenu(event) {
 		event.target.classList.remove('isActive');
 		toArray(event.target.querySelectorAll('.isActive')).forEach(function(item){ item.classList.remove('isActive')});
 		callback();
+
 	}
 
 	function getMenuItems(menu) {
-		return toArray(menu.querySelectorAll('[data-menu-items] li'));
+		return toArray(menu.querySelector('[data-menu-items]').children);
 	}
 
 	function toArray(nodeList) {
 		return Array.prototype.slice.apply(nodeList);
 	}
-
 }
 init({});
