@@ -1,8 +1,28 @@
+  var TAB = 9;
+  var ENTER = 13;
+  var ESCAPE = 27;
+  var SPACE = 32;
+  var LEFT_ARROW = 37;
+  var UP_ARROW = 38;
+  var RIGHT_ARROW = 39;
+  var DOWN_ARROW = 40;
 
+  var whitelist = [13];
+  var root;
 
 	var callback =  noop;
 
 	function initMenu(menu) {
+		if(isRootMenu(menu)) {
+			root = menu;
+			menu.addEventListener('keyup', function (event) {
+				if(event.which === DOWN_ARROW || event.which === RIGHT_ARROW) {
+					menu.querySelector('[tabindex]').focus();
+				}
+
+			}, false);
+
+		}
 		bindEventsToMenu(menu);
 		getMenuItems(menu).forEach(function(item) {
 			if(isMenu(item)) {
@@ -18,12 +38,10 @@
 	//  starts at root of a tree and closes all nested menus within it
 	//  including itself
 	function closeAllMenus(rootMenu) {
-		closeMenu(rootMenu);
 		toArray(rootMenu.children).forEach(function(child) {
-			if(isMenu(child)) {
-				closeAllMenus(child);
-			}
+			closeAllMenus(child);
 		});
+		closeMenu(rootMenu);
 	}
 
 	//  if the mouse hovers on the trigger
@@ -138,47 +156,47 @@
 		placeFocusOnFirstMenuItem(menu);
 	}
 
+
 	function placeFocusOnFirstMenuItem(menu) {
 		menu.querySelector('[data-menu-items]').querySelector('[tabindex]').focus();
 	}
 
 	function handleKeyUpOnTrigger(menu, event) {
 		switch(event.which) {
-		case 13 :
+		case TAB :
+			root.focus();
+			closeAllMenus(root);
+			break;
+		case ENTER :
 			handleEnter(menu, event);
 			break;
-		case 32 :
+		case SPACE :
 			handleSpace(menu, event);
 			break;
-		case 27 :
+		case ESCAPE :
 			handleEscape(menu, event);
 			break;
-		case 37 :
-			// left arrow
+		case LEFT_ARROW :
 			handleLeftArrowOnFocusable(getMenuOrientation())(event.currentTarget, menu);
 			break;
-		case 38 :
-			// up arrow
+		case UP_ARROW :
 			handleUpArrowOnFocusable(getMenuOrientation())(event.currentTarget, menu);
 			break;
-		case 39 :
-			//  right arrow
+		case RIGHT_ARROW :
 			handleRightArrowOnFocusable(getMenuOrientation())(event.currentTarget, menu);
 			break;
-		case 40 :
-			//  down arrow
+		case DOWN_ARROW :
 			handleDownArrowOnFocusable(getMenuOrientation())(event.currentTarget, menu);
 			break;
 		default :
 			// do nowt.
 		}
+		event.stopPropagation();
 	}
 
 	function getMenuOrientation() {
 		return 'vertical';
 	}
-
-	var whitelist = [13, 9];
 
 	function bindEventsToMenu(menu) {
 
@@ -224,9 +242,12 @@
 		return obj !== null;
 	}
 
+	function isRootMenu(menu) {
+		return menu.hasAttribute('data-menu-root');
+	}
 	function searchAncestorElements(descendent, selector){
 		var parent = descendent.parentNode;
-		if(parent === null || parent.hasAttribute('data-menu-root')) { return false; }
+		if(parent === null || isRootMenu(parent)) { return false; }
 		if(parent.matches(selector)) {
 			return parent;
 		} else {
