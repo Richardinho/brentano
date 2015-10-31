@@ -119,13 +119,17 @@
 	}
 
 	function handleSpace(menu, event) {
-		openSubmenu(menu);
+		if(event.currentTarget.hasAttribute('data-menu-trigger'
+			openSubmenu(menu);
+		}
 	}
 
 	function handleEnter(menu, event) {
 		if(event.currentTarget.nodeName !== 'A'){
 			event.preventDefault();
-			openSubmenu(menu);
+			if(event.currentTarget.hasAttribute('data-menu-trigger')){
+				openSubmenu(menu);
+			}
 		}
 	}
 
