@@ -119,7 +119,7 @@
 	}
 
 	function handleSpace(menu, event) {
-		if(event.currentTarget.hasAttribute('data-menu-trigger'
+		if(event.currentTarget.hasAttribute('data-menu-trigger')){
 			openSubmenu(menu);
 		}
 	}
