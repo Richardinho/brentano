@@ -3,33 +3,67 @@
 <head>
 
 	<style>
+		ul {
+			list-style : none;
+		}
+		[data-menu] {
+			background-color : pink;
+		}
+		[data-menu-trigger], a {
+			padding : 12px 24px;
+			background : lightblue;
+			display : inline-block;
+		}
+
+		[data-menu-items] {
+			display : none;
+		}
+		.isOpen > [data-menu-items] {
+			display : block;
+		}
+		#menu > [data-menu-items] {
+			display : block;
+		}
 
 
 	</style>
 </head>
 <body>
-<div id="menu">
+<div data-menu-root id="menu">
 	<ul data-menu-items>
 		<li data-menu>
-			<span data-menu-trigger>alpha</span>
+			<span id="start" tabindex="0" data-menu-trigger>alpha</span>
 			<ul data-menu-items>
 				<li data-menu>
-					<span data-menu-trigger>one</span>
+					<span tabindex="0" data-menu-trigger>one</span>
 					<ul data-menu-items >
-						<li><a href='#apple'>apple</a></li>
-						<li><a href='#carrot'>carrot</a></li>
+						<li><a tabindex="0" href='#orange'>orange</a></li>
+						<li><a tabindex="0" href='#pineapple'>pineapple</a></li>
 					</ul>
 				</li>
 				<li>
-					<a href='#lettuce'>lettuce</a>
+					<a tabindex="0" href='#lettuce'>lettuce</a>
 				</li>
 			</ul>
 		</li>
 		<li>
-			<a href='#banana'>banana</a>
+			<a tabindex="0" href='#banana'>banana</a>
+		</li>
+		<li>
+			<a tabindex="0" href='#carrot'>carrot</a>
+		</li>
+		<li>
+			<a tabindex="0" href='#leek'>leek</a>
+		</li>
+		<li>
+			<a tabindex="0" href='#tomato'>tomato</a>
 		</li>
 	</ul>
 </div>
-	<script type='text/javascript' src="/navbar/main.js"></script>
+	<script type='text/javascript' src="/src/main.js"></script>
+	<script>
+		initMenu(document.querySelector('#menu'));
+		document.querySelector('#start').focus();
+	</script>
 </body>
 </html>
