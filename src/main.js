@@ -123,7 +123,7 @@
 	}
 
 	function handleEnter(menu, event) {
-		if(event.currentTarget.nodeName == 'A'){
+		if(event.currentTarget.nodeName !== 'A'){
 			event.preventDefault();
 			openSubmenu(menu);
 		}
