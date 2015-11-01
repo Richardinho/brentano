@@ -1,0 +1,43 @@
+<html>
+<head>
+
+	<style>
+		body {
+			font-family : system;
+		}
+
+
+	</style>
+
+
+</head>
+<body>
+
+
+	<h1>IE8 events handling test</h1>
+	<div tabindex='0' id="foo">hello its the end of the world as we know it</div>
+
+	<script type="text/javascript">
+
+		var foo = document.getElementById('foo');
+		var fool = document.querySelectorAll('#foo');
+		console.log('this is fool:', fool);
+
+		foo.attachEvent('onclick', function(e) {
+			e.target = e.srcElement;
+			console.log(e.target.id);
+		});
+
+		foo.attachEvent('onkeydown', function(e) {
+
+			console.log('on key down');
+
+		});
+
+
+
+
+	</script>
+
+</body>
+</html>

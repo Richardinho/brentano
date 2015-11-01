@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="/css/reset.css"/>
+	<style>
+		body {
+			font-family : system, helvetica;
+		}
+
+		[data-menu-items] {
+			display : none;
+		}
+		.isOpen > [data-menu-items] {
+			display : block;
+		}
+		[data-menu-root] > [data-menu-items] {
+			display : block;
+		}
+
+	</style>
+
+	<style>
+
+		body {
+			padding : 12px;
+		}
+
+		.container {
+			width : 80%;
+			margin : auto;
+			margin-top : 100px;
+			background-color : #ddd;
+		}
+		.menu-bar {
+			border : solid 1px black;
+			background : #777;
+
+		}
+		.menu-bar:after {
+			content : '';
+			display : block;
+			clear : both;
+		}
+		.menu-bar > li{
+			float : left;
+			position : relative;
+		}
+		.menu-bar-item {
+
+			color : white;
+			font-family : system, helvetica;
+			padding : 12px 24px;
+			display : block;
+
+		}
+		.menu-bar > li:hover .menu-bar-item, .menu-bar .menu-bar-item:focus {
+			background : #666;
+		}
+		.sub-panel {
+			position : absolute;
+			left : 0;
+			top : 100%;
+			width : 100%;
+			border : solid 1px #666;
+			background : white;
+		}
+		.sub-panel-item {
+			display : block;
+			padding : 6px;
+			font-style : italic;
+			color : #777;
+			text-decoration : none;
+		}
+		.sub-panel-item:hover, .sub-panel-item:focus {
+			text-decoration : underline;
+		}
+		h1 {
+			font-family : system, times;
+			font-size : 2em;
+			line-height : 1.5;
+		}
+
+
+	</style>
+</head>
+<body>
+<input type="text"/>
+
+<h1>Basic example</h1>
+<p>Manually tested in Chrome, Firefox, Safari, & IE8</p>
+
+<div class="container">
+	<div tabindex="0" data-menu-root  >
+		<ul class="menu-bar" data-menu-items data-menu-orientation="horizontal">
+			<li data-menu >
+				<span class="menu-bar-item" tabindex="1" data-menu-trigger>alpha</span>
+				<ul data-menu-items data-menu-orientation="vertical" class="sub-panel">
+					<li >
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html" >lettuce</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">cauliflower</a>
+					</li>
+				</ul>
+			</li>
+			<li data-menu >
+				<span class="menu-bar-item" tabindex="1" data-menu-trigger>beta</span>
+				<ul data-menu-items data-menu-orientation="vertical" class="sub-panel">
+					<li >
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html" >apple</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">orange</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">banana</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">grapefruit</a>
+					</li>
+				</ul>
+			</li>
+			<li data-menu >
+				<span class="menu-bar-item" tabindex="1" data-menu-trigger>gamma</span>
+				<ul data-menu-items data-menu-orientation="vertical" class="sub-panel">
+					<li >
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html" >Africa</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">Europe</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">Australasia</a>
+					</li>
+				</ul>
+			</li>
+			<li data-menu >
+				<span class="menu-bar-item" tabindex="1" data-menu-trigger>delta</span>
+				<ul data-menu-items data-menu-orientation="vertical" class="sub-panel">
+					<li >
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html" >Thames</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">Clyde</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">Mersey</a>
+					</li>
+				</ul>
+			</li>
+			<li data-menu >
+				<span class="menu-bar-item" tabindex="1" data-menu-trigger>epsilon</span>
+				<ul data-menu-items data-menu-orientation="vertical" class="sub-panel">
+					<li >
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">Bristol</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">Glasgow</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="main-page">
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+			ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+			laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+			voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+			cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+			ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+			laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+			voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+			cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+			ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+			laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+			voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+			cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	</div>
+</div>
+
+<input type="text"/>
+<script type='text/javascript' src="/src/polyfills.js"></script>
+<script type='text/javascript' src="/src/utils.js"></script>
+<script type='text/javascript' src="/src/main.js"></script>
+<script>
+		initMenu(document.querySelector('[data-menu-root]'));
+	</script>
+</body>
+</html>

@@ -9,12 +9,16 @@
 		[data-menu] {
 			background-color : pink;
 		}
-		[data-menu-trigger], a {
+		 a {
 			padding : 12px 24px;
 			background : lightblue;
 			display : inline-block;
 		}
-
+		[data-menu-trigger] {
+			padding : 12px 24px;
+			background : green;
+			display : inline-block;
+		}
 		[data-menu-items] {
 			display : none;
 		}
@@ -33,7 +37,7 @@
 <div tabindex="0" data-menu-root id="menu">
 	<ul data-menu-items>
 		<li data-menu>
-			<span id="start" tabindex="1" data-menu-trigger>alpha</span>
+			<span id="start" data-menu-trigger="" tabindex="1" >alpha</span>
 			<ul data-menu-items>
 				<li data-menu>
 					<span tabindex="1" data-menu-trigger>one</span>
@@ -62,6 +66,8 @@
 	</ul>
 </div>
 <input type="text"/>
+	<script type='text/javascript' src="/src/polyfills.js"></script>
+	<script type='text/javascript' src="/src/utils.js"></script>
 	<script type='text/javascript' src="/src/main.js"></script>
 	<script>
 		initMenu(document.querySelector('#menu'));
