@@ -54,10 +54,23 @@
 
 	function handleMouseLeave(event) {
 		var menu = event.target;
-		closeAllMenus(menu);
+		var timeoutId = setTimeout(function(){
+			closeAllMenus(menu);
+		}, 1000);
+		menu.setAttribute('data-timeout', timeoutId);
+	}
+
+	function handleMouseEnterMenu(event) {
+
+		var menu = event.target;
+		if(menu.getAttribute('data-timeout')) {
+			var timeoutId = menu.getAttribute('data-timeout')
+			clearTimeout(timeoutId);
+		}
 	}
 
 	function handleMouseOverTrigger(menu) {
+		closeAllMenus(root);
 		open(menu);
 	}
 
@@ -205,9 +218,11 @@
 	function bindEventsToMenu(menu) {
 
 		utils.addListener(menu, 'mouseleave', handleMouseLeave, false);
+		utils.addListener(menu, 'mouseenter', handleMouseEnterMenu, false);
 		var trigger = menu.querySelector('[data-menu-trigger]');
 
 		// check that this is the trigger for this menu
+		// todo: trigger does not have to be a direct child, it only has to not be nested within another menu
 		if(!!trigger && isDirectChild(menu, trigger)) {
 			utils.addListener(trigger, 'mouseover', handleMouseOverTrigger.bind(null, menu), false);
 			utils.addListener(trigger, 'keyup', handleKeyUpOnTrigger.bind(null, menu), false);
@@ -233,6 +248,10 @@
 
 	function getFocusablesForMenu(menu) {
 		var menuItemsContainer = menu.querySelector('[data-menu-items]');
+		//id menuItems Container is not a ul element, find first ul element within it.
+		if(menuItemsContainer.nodeName !== 'UL') {
+			menuItemsContainer = menuItemsContainer.querySelector('ul');
+		}
 		//  important to filter out menus
 		var menuItems = utils.toArray(menuItemsContainer.children).filter(isNotMenu);
 		var map =menuItems.map(function (item) {

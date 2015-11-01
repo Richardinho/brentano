@@ -29,14 +29,11 @@
 			background-color : pink;
 		}
 
-		[data-menu=second-level] [data-menu-trigger] {
+		.menu-bar-item  > [tabindex] {
 			padding : 12px 24px;
 			display : inline-block;
 			background : pink;
-
-
 		}
-
 
 		.sub-menu-list {
 			position : absolute;
@@ -50,9 +47,8 @@
 
 		}
 		.sub-menu-list > li {
-			position : relative;
-			border  : solid 1px red;
-			width : 100%;
+
+			width : 400px;
 		}
 		.sub-menu-list > li > a {
 			background : cornflowerblue;
@@ -61,9 +57,16 @@
 			padding : 12px 24px;
 		}
 
+		.sub-menu-item > [tabindex]{
+			padding : 12px 24px;
+			display : inline-block;
+			background : red;
+			width : 100%;
+		}
+
 		.sub-sub-menu-list {
 			position : absolute;
-			left : 100%;
+			left : 400px;
 			top : 0;
 			background : orange;
 			z-index : 2;
@@ -97,33 +100,85 @@
 <input type="text"/>
 <div tabindex="0" data-menu-root id="menu" >
 	<ul data-menu-items data-menu-orientation="horizontal">
-		<li data-menu="second-level" >
-			<span id="start" tabindex="1" data-menu-trigger>alpha</span>
+		<li class="menu-bar-item" data-menu>
+			<span tabindex="1" data-menu-trigger>Places</span>
 			<ul data-menu-items data-menu-orientation="vertical" class="sub-menu-list">
-				<li data-menu >
-					<span tabindex="1" data-menu-trigger>one</span>
+				<li class="sub-menu-item" data-menu >
+					<span tabindex="1" data-menu-trigger>cities</span>
 					<ul data-menu-items data-menu-orientation="vertical" class="sub-sub-menu-list" >
-						<li><a tabindex="1" href='#orange'>orange</a></li>
-						<li><a tabindex="1" href='#pineapple'>pineapple</a></li>
+						<li><a tabindex="1" href='#orange'>London</a></li>
+						<li><a tabindex="1" href='#pineapple'>New York</a></li>
+						<li><a tabindex="1" href='#pineapple'>Los Angeles</a></li>
+						<li><a tabindex="1" href='#pineapple'>Paris</a></li>
+						<li><a tabindex="1" href='#pineapple'>Birmingham</a></li>
 					</ul>
 				</li>
-				<li>
-					<a tabindex="1" href='#lettuce'>lettuce</a>
+				<li class="sub-menu-item" data-menu >
+					<span tabindex="1" data-menu-trigger>rivers</span>
+					<ul data-menu-items data-menu-orientation="vertical" class="sub-sub-menu-list" >
+						<li><a tabindex="1" href='#orange'>The Seine</a></li>
+						<li><a tabindex="1" href='#pineapple'>The Rhine</a></li>
+					</ul>
 				</li>
+				<li class="sub-menu-item" data-menu >
+					<span tabindex="1" data-menu-trigger>Lakes</span>
+					<ul data-menu-items data-menu-orientation="vertical" class="sub-sub-menu-list" >
+						<li><a tabindex="1" href='#orange'>Lake Superior</a></li>
+						<li><a tabindex="1" href='#pineapple'>Lake Windermere</a></li>
+					</ul>
+				</li>
+
 			</ul>
 		</li>
-		<li>
-			<a tabindex="1" href='#banana'>banana</a>
+		<li class="menu-bar-item" data-menu >
+			<span tabindex="1" data-menu-trigger>paintings</span>
+			<ul data-menu-items data-menu-orientation="vertical" class="sub-menu-list">
+				<li class="sub-menu-item" data-menu >
+					<span tabindex="1" data-menu-trigger>Italian</span>
+					<ul data-menu-items data-menu-orientation="vertical" class="sub-sub-menu-list" >
+						<li><a tabindex="1" href='#orange'>Mona Lisa</a></li>
+						<li><a tabindex="1" href='#pineapple'>The Creation of Adam</a></li>
+						<li><a tabindex="1" href='#pineapple'>The Supper at Emaus</a></li>
+					</ul>
+				</li>
+				<li class="sub-menu-item" data-menu >
+					<span tabindex="1" data-menu-trigger>French</span>
+					<ul data-menu-items data-menu-orientation="vertical" class="sub-sub-menu-list" >
+						<li><a tabindex="1" href='#orange'>Water Lillies</a></li>
+						<li><a tabindex="1" href='#pineapple'>Oath of the Horates</a></li>
+					</ul>
+				</li>
+				<li class="sub-menu-item" data-menu >
+					<span tabindex="1" data-menu-trigger>English</span>
+					<ul data-menu-items data-menu-orientation="vertical" class="sub-sub-menu-list" >
+						<li><a tabindex="1" href='#orange'>The Haywain</a></li>
+						<li><a tabindex="1" href='#pineapple'>Hannibal Crossing the Alps</a></li>
+					</ul>
+				</li>
+
+			</ul>
 		</li>
-		<li>
-			<a tabindex="1" href='#carrot'>carrot</a>
+		<li class="menu-bar-item" data-menu >
+			<span tabindex="1" data-menu-trigger>food</span>
+			<ul data-menu-items data-menu-orientation="vertical" class="sub-menu-list">
+				<li class="sub-menu-item" data-menu >
+					<span tabindex="1" data-menu-trigger>vegetables</span>
+					<ul data-menu-items data-menu-orientation="vertical" class="sub-sub-menu-list" >
+						<li><a tabindex="1" href='#orange'>carrot</a></li>
+						<li><a tabindex="1" href='#pineapple'>turnip</a></li>
+					</ul>
+				</li>
+				<li class="sub-menu-item" data-menu >
+					<span tabindex="1" data-menu-trigger>fruit</span>
+					<ul data-menu-items data-menu-orientation="vertical" class="sub-sub-menu-list" >
+						<li><a tabindex="1" href='#apple'>apple</a></li>
+						<li><a tabindex="1" href='#orange'>orange</a></li>
+					</ul>
+				</li>
+
+			</ul>
 		</li>
-		<li>
-			<a tabindex="1" href='#leek'>leek</a>
-		</li>
-		<li>
-			<a tabindex="1" href='#tomato'>tomato</a>
-		</li>
+
 	</ul>
 </div>
 <input type="text"/>

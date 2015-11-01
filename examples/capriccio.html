@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="/css/reset.css"/>
+	<style>
+		body {
+			font-family : system, helvetica;
+			padding : 12px;
+		}
+		[data-menu=first-tier] {
+			position : relative;
+		}
+
+		.container {
+			width : 60%;
+			margin : auto;
+			margin-top : 20px;
+		}
+
+		.menu-bar-item {
+			background : cornflowerblue;
+			display : inline-block;
+			border-radius : 2px;
+			color : white;
+			font-family : helvetica;
+			padding : 12px 24px;
+
+		}
+
+		[data-menu=first-tier] {
+			display : inline-block;
+			background : rgba(250, 250, 250, 0.5);
+			border : solid 1px #eee;
+			border-radius : 4px;
+			padding : 12px;
+			position : relative;
+
+		}
+
+		[data-menu=first-tier] .sub-panel {
+			opacity : 0;
+			visibility : hidden;
+			display : inline-block;
+			position : absolute;
+			left : 100%;
+			top : 0;
+			transition : opacity 1s linear;
+			z-index : 100;
+			background-color : rgba(234, 234, 234, 0.5);
+		}
+		[data-menu=first-tier].isOpen .sub-panel {
+			opacity : 1;
+			visibility : visible;
+		}
+
+		.cauliflower-img {
+			margin-bottom : 12px;
+			border : solid 1px #aaa;
+		}
+
+		.sub-panel-item {
+			padding : 12px 24px;
+			background : orange;
+			margin-bottom : 12px;
+			border-radius : 4px;
+			display : inline-block;
+		}
+		.vegetable-panel {
+			background : white;
+			border : solid 1px #ddd;
+			border-radius : 5px;
+			padding : 12px;
+		}
+
+		.sub-panel-item.thames-panel {
+			background : rgba(234, 120, 50, 1);
+			padding : 20px;
+		}
+		.thames-panel {
+			width : 300px;
+			text-decoration : none;
+			color : #333;
+			font-style : italic;
+			font-family : times;
+			line-height : 1.5;
+		}
+		.thames-img {
+			width : 100%;
+			border : solid 2px rgba(50, 12, 5, 0.4);
+		}
+		h1 {
+			margin-bottom : 24px;
+			font-size : 1.5em;
+		}
+
+
+		
+
+
+	</style>
+
+	<style>
+
+
+
+	</style>
+</head>
+<body>
+<input type="text"/>
+
+<h1>Capriccio: a rather fanciful example</h1>
+
+<div class="container">
+	<div tabindex="0" data-menu-root  >
+		<!-- root menu does not need a trigger -->
+		<ul class="menu-bar" data-menu-items data-menu-orientation="horizontal">
+			<li data-menu="first-tier">
+				<span class="menu-bar-item" tabindex="1" data-menu-trigger>alpha</span>
+				<div data-menu-items data-menu-orientation="vertical" class="sub-panel vegetable-panel">
+					<h2>The story of vegetables</h2>
+					<p>contrary to popular belief..</p>
+					<img class='cauliflower-img' src='/examples/images/cauliflower.jpeg'/>
+					<ul>
+						<li >
+							<a class="sub-panel-item" tabindex="1" href="/generic-page.html" >lettuce</a>
+						</li>
+						<li>
+							<a class="sub-panel-item" tabindex="1" href="/generic-page.html">cauliflower</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<li data-menu="first-tier" >
+				<span class="menu-bar-item" tabindex="1" data-menu-trigger>beta</span>
+				<ul data-menu-items data-menu-orientation="vertical" class="sub-panel">
+					<li >
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html" >apple</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">orange</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">banana</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">grapefruit</a>
+					</li>
+				</ul>
+			</li>
+			<li data-menu="first-tier" >
+				<span class="menu-bar-item" tabindex="1" data-menu-trigger>gamma</span>
+				<ul data-menu-items data-menu-orientation="vertical" class="sub-panel">
+					<li >
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html" >Africa</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">Europe</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">Australasia</a>
+					</li>
+				</ul>
+			</li>
+			<li data-menu="first-tier" >
+				<span class="menu-bar-item" tabindex="1" data-menu-trigger>delta</span>
+				<ul data-menu-items data-menu-orientation="vertical" class="sub-panel">
+					<li >
+
+						<a class="sub-panel-item thames-panel" tabindex="1" href="/generic-page.html" >
+							<h2>The Thames</h2>
+							<img class='thames-img' src='/examples/images/thames.jpg'/>
+							<p>
+								The principal tributaries of the River Thames on the Tideway include the rivers Brent,
+								Wandle, Effra, Westbourne, Fleet, Ravensbourne (the final part of which is called
+								Deptford Creek), Lea, Roding, Darent and Ingrebourne. At London, the water is
+								slightly brackish with sea salt, being a mix of sea and fresh water.
+							</p>
+
+						</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">Clyde</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">Mersey</a>
+					</li>
+				</ul>
+			</li>
+			<li data-menu="first-tier">
+				<span class="menu-bar-item" tabindex="1" data-menu-trigger>epsilon</span>
+				<ul data-menu-items data-menu-orientation="vertical" class="sub-panel">
+					<li >
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">Bristol</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">Glasgow</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+</div>
+
+<input type="text"/>
+<script type='text/javascript' src="/src/polyfills.js"></script>
+<script type='text/javascript' src="/src/utils.js"></script>
+<script type='text/javascript' src="/src/main.js"></script>
+<script>
+		initMenu(document.querySelector('[data-menu-root]'));
+	</script>
+</body>
+</html>
