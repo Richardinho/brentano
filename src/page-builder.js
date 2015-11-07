@@ -26,28 +26,7 @@ function createMenuList(listItems){
 	return list;
 }
 
-/*
-function createTrigger(text, title) {
-	var trigger = document.createElement('span');
-	trigger.setAttribute('data-trigger', '');
-	trigger.setAttribute('title', title || 'trigger')
-	trigger.setAttribute('tabindex', -1);
-	return trigger;
-}
 
-function createLink(href, text, target, title) {
-	var link = document.createElement('a');
-	var text = document.createTextNode(text || '');
-	link.setAttribute('href', href || '#');
-	link.setAttribute('tabindex', -1); // make focusable but outside of the natural page tabbing order
-	link.setAttribute('target', target || '_self');
-	link.setAttribute('title', title || '');
-	link.setAttribute('data-trigger', '');
-	link.appendChild(text);
-	return link;
-}
-
-*/
 //
 
 function extend(Parent, Child) {
