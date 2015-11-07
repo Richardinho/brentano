@@ -94,6 +94,30 @@ var utils = utils || {};
 		}
 	}
 
+	utils.searchAncestorElements = function sae (descendent, selector){
+		var parent = descendent.parentNode;
+		if(parent === null) { return false; }
+		if(parent.matches(selector)) {
+			return parent;
+		} else {
+			return sae(parent, selector);
+		}
+	}
+
+	utils.toLowerCase = function(obj) {
+		return (obj + '').toLowerCase();
+	}
+
+	utils.toUpperCase = function(obj) {
+		return (obj + '').toUpperCase();
+	}
+
+	utils.bindHandler = function (event, handler) {
+		return function(element) {
+			utils.addListener(element, event, handler);
+		}
+	}
+
 	function findNextSiblingElement(node) {
 		if(!node) {
 			return false;

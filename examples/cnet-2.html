@@ -1,0 +1,184 @@
+<!doctype>
+	<html>
+<head>
+	<link href='/css/reset.css' rel='stylesheet'/>
+	<link href='/css/base-styles.css'/>
+	<style>
+
+		.menu-container {
+			position  :relative;
+		}
+
+		ul.menu-bar {
+			background : #AA1801;
+			font-family : helvetica;
+		}
+
+		.menu-bar:after {
+			clear : both;
+			content : '';
+			display : table;
+		}
+
+		.menu-bar > li {
+			float : left;
+		}
+
+		.menu-bar > li > a {
+			position : relative;
+			display : inline-block;
+			padding : 12px 24px;
+			color : white;
+			font-size : 14px;
+			line-height : 1;
+			padding : 23px;
+			border-left : solid 1px white;
+			border-left: 1px solid rgba(0,0,0,0.2);
+			box-shadow: 1px 0 rgba(255,255,255,0.1) inset;
+			transition: opacity 0.2s ease;
+			text-decoration : none;
+		}
+
+		.menu-bar > li > a:hover:before {
+			background-color: rgba(0,0,0,0.1);
+			box-shadow: 0 0 10px rgba(0,0,0,0.2) inset;
+			content: "";
+			position: absolute;
+			display: block;
+			height: 100%;
+			width: 100%;
+			top: 0;
+			left: 0%;
+		}
+
+		[data-menu] {
+			opacity : 0;
+		}
+
+		[data-menu].is-active {
+			opacity : 1;
+		}
+
+		.panel-container {
+			display : inline-block;
+			position : absolute;
+
+		}
+
+		.panel-container > div {
+			display : flex;
+			flex-wrap : wrap;
+		}
+
+		.level-2-menu {
+			background : yellow;
+			width : 300px;
+			opacity : 0;
+			margin-top : 10px;
+			transition : 0.3s all linear;
+		}
+		.level-2-menu.is-active {
+			margin-top : 0;
+			opacity : 1;
+		}
+
+		.level-3-menu {
+			background : orange;
+			width : 200px;
+			opacity : 0;
+			transition : 0.3s all linear;
+		}
+		.level-3-menu.is-active {
+			opacity : 1;
+		}
+
+		.level-2-menu h2 {
+			font-family : helvetica;
+			font-family : 14px;
+			text-transform : uppercase;
+			color : black;
+			padding : 12px 24px;
+		}
+
+		.level-2-menu  li > a {
+			padding : 12px 24px;
+			display : inline-block;
+		}
+
+
+
+		.level-3-menu  li > a {
+			padding : 8px 24px;
+
+			display : inline-block;
+		}
+
+
+
+	</style>
+	</head>
+<body>
+	<div class='menu-container'>
+		<ul data-menu='level1' data-orientation='horizontal' id='root' class='menu-bar is-active'>
+			<li><a href='#beta'>beta</a></li>
+			<li><a href='#artists'>artists</a></li>
+			<li><a href='/generic-page.html'>love</a></li>
+			<li><a href='/generic-page.html'>porridge</a></li>
+			<li><a href='/generic-page.html'>oats</a></li>
+		</ul>
+
+		<div class='panel-container'>
+			<div>
+
+				<div data-menu='level2' data-orientation='vertical' data-parent='root' id="beta" class='level-2-menu'>
+					<h2>Top Categories</h2>
+					<ul>
+						<li><a href='#gamma'>blah</a></li>
+						<li><a href='#delta'>blah</a></li>
+						<li><a href='/generic-page.html'>blah</a></li>
+					</ul>
+				</div>
+				<ul data-menu='level3' data-orientation='vertical' data-parent='beta' id="gamma" class='level-3-menu'>
+					<li><a href='/generic-page.html'>Lincoln</a></li>
+					<li><a href='/generic-page.html'>Washington</a></li>
+					<li><a href='/generic-page.html'>Rooseveldt</a></li>
+					<li><a href='/generic-page.html'>Rooseveldt</a></li>
+					<li><a href='/generic-page.html'>Rooseveldt</a></li>
+					<li><a href='/generic-page.html'>Rooseveldt</a></li>
+				</ul>
+				<ul data-menu='level3' data-orientation='vertical' data-parent='beta' id="delta" class='level-3-menu'>
+					<li><a href='/generic-page.html'>apple</a></li>
+					<li><a href='/generic-page.html'>orange</a></li>
+					<li><a href='/generic-page.html'>banan</a></li>
+				</ul>
+			</div>
+		</div>
+
+
+
+		<ul data-menu='level2' data-orientation='vertical' data-parent='root' id="artists" class='level-2-menu'>
+			<li><a href=''>Sculptors</a></li>
+			<li><a href=''>Painters</a></li>
+			<li><a href='/generic-page.html'>Architects</a></li>
+		</ul>
+	</div>
+	<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising
+		pain was born and I will give you a complete account of the system, and expound the actual
+		teachings of the great explorer of the truth, the master-builder of human happiness. No
+		one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those
+		who do not know how to pursue pleasure rationally encounter consequences that are extremely
+		painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself,
+		because it is pain, but because occasionally circumstances occur in which toil and pain can procure
+		him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical
+		exercise, except to obtain some advantage from it? But who has any right to find fault with a man who
+		chooses to enjoy a pleasure that has no annoying consequences,
+		or one who avoids a pain that produces no resultant pleasure?</p>
+
+
+
+<script src='/src/utils.js'></script>
+<script src='/src/common.js'></script>
+<script src='/src/key-nav.js'></script>
+<script src='/src/mouse-nav.js'></script>
+</body>
+</html>

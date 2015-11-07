@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+	<link href="/css/reset.css" rel="stylesheet"/>
+
+	<style>
+
+		body {
+			padding : 10px;
+		}
+
+		*, *:before, *:after {
+			box-sizing : border-box;
+		}
+		ul {
+			list-style : none;
+		}
+
+		input {
+			margin : 24px;
+		}
+
+		[data-menu-root] {
+			margin-bottom : 24px;
+		}
+	</style>
+	<!--  menu bar -->
+	<style>
+		.menu-bar {
+			background : green;
+			position : relative;
+		}
+		.menu-bar:after {
+			content : ' ';
+			display : table;
+			clear : both;
+		}
+		.menu-bar > li {
+			float : left;
+		}
+		.menu-bar-item {
+			padding : 12px 24px;
+			display : block;
+			color : white;
+			text-decoration : none;
+		}
+		.menu-bar > li:hover .menu-bar-item {
+			background : #29B029;
+			text-decoration : underline;
+		}
+
+		[data-menu] .sub-panel {
+			display : none;
+			position : absolute;
+			left : 0;
+			width : 100%;
+			background-color: green;
+		}
+
+		[data-menu] .sub-panel  {
+			padding-left : 100px;
+		}
+
+		[data-menu] .sub-panel > ul {
+			width : 200px;
+			position : relative;
+		}
+
+		[data-menu].isOpen .sub-panel {
+			display : inline-block;
+		}
+
+		.sub-panel-item {
+			background : red;
+			padding : 12px 24px;
+			display : inline-block;
+			width : 200px;
+		}
+
+		.sub-panel [data-menu] .sub-sub-panel {
+			display : none;
+			position : absolute;
+			left : 100%;
+			top : 0;
+		}
+
+		.sub-panel [data-menu].isOpen .sub-sub-panel {
+			display : inline-block;
+			background : orange;
+		}
+
+	</style>
+
+
+
+</head>
+<body>
+<input type="text"/>
+
+
+<div tabindex="0" data-menu-root id="menu" >
+
+	<ul class="menu-bar" data-menu-items data-menu-orientation="horizontal">
+		<li data-menu data-first-level>
+			<span class="menu-bar-item" tabindex="1" data-menu-trigger>alpha</span>
+			<div class="sub-panel">
+				<ul data-menu-items data-menu-orientation="vertical">
+					<li >
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html" >lettuce</a>
+					</li>
+					<li>
+						<a class="sub-panel-item" tabindex="1" href="/generic-page.html">cauliflower</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<li data-menu data-first-level>
+			<span class="menu-bar-item" tabindex="1" data-menu-trigger>alpha</span>
+			<div class="sub-panel">
+				<ul data-menu-items data-menu-orientation="vertical">
+					<li data-menu data-second-level >
+						<span class="sub-panel-item" tabindex="1" href="/generic-page.html" data-menu-trigger>lettuce</span>
+						<ul data-menu-items data-menu-orientation="vertical" class="sub-sub-panel">
+							<li><a class="sub-panel-item" tabindex="1" href="/generic-page.html">banana</a></li>
+							<li><a class="sub-panel-item" tabindex="1" href="/generic-page.html">forms</a></li>
+							<li><a class="sub-panel-item" tabindex="1" href="/generic-page.html">forms</a></li>
+							<li><a class="sub-panel-item" tabindex="1" href="/generic-page.html">forms</a></li>
+							<li><a class="sub-panel-item" tabindex="1" href="/generic-page.html">forms</a></li>
+						</ul>
+					</li>
+					<li><a class="sub-panel-item" tabindex="1" href="/generic-page.html">cauliflower</a></li>
+					<li><a class="sub-panel-item" tabindex="1" href="/generic-page.html">cauliflower</a></li>
+					<li><a class="sub-panel-item" tabindex="1" href="/generic-page.html">cauliflower</a></li>
+				</ul>
+			</div>
+		</li>
+		<li><span class="menu-bar-item">gamma</span></li>
+		<li><a href='' class="menu-bar-item">delta</a></li>
+	</ul>
+
+</div>
+
+<input type="text"/>
+<script type='text/javascript' src="/src/polyfills.js"></script>
+<script type='text/javascript' src="/src/utils.js"></script>
+<script type='text/javascript' src="/src/main.js"></script>
+<script>
+		initMenu(document.querySelector('#menu'));
+</script>
+</body>
+</html>

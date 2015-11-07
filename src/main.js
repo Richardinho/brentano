@@ -10,7 +10,11 @@
   var whitelist = [13];
   var root;
 
-	var callback =  noop;
+	var callback =  function(menu) {
+
+	};
+
+
 	var utils = window.utils;
 
 	function initMenu(menu) {
@@ -50,14 +54,23 @@
 	//  or tab onto trigger etc...
 	function open(menu) {
 		menu.classList.add('isOpen');
+		callback(menu);
 	}
 
 	function handleMouseLeave(event) {
 		var menu = event.target;
-		var timeoutId = setTimeout(function(){
+		event.stopPropagation();
+		console.dir(menu)
+
+		if(menu.hasAttribute('data-menu-timeout')) {
+			console.log('foo')
+			var timeoutId = setTimeout(function(){
+				closeAllMenus(menu);
+			}, 1000);
+			menu.setAttribute('data-timeout', timeoutId);
+		} else {
 			closeAllMenus(menu);
-		}, 1000);
-		menu.setAttribute('data-timeout', timeoutId);
+		}
 	}
 
 	function handleMouseEnterMenu(event) {
@@ -70,7 +83,7 @@
 	}
 
 	function handleMouseOverTrigger(menu) {
-		closeAllMenus(root);
+		//closeAllMenus(root);
 		open(menu);
 	}
 

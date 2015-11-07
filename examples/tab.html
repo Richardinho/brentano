@@ -1,0 +1,104 @@
+<!doctype>
+	<html>
+<head>
+	<style>
+
+		a {
+		}
+
+		html {
+			box-sizing : border-box;
+		}
+
+		*, :before, :after {
+			box-sizing : inherit;
+		}
+
+		ul {
+			list-style : none;
+			padding : 0;
+			margin : 0;
+		}
+
+		ul.menu-bar {
+			background : #ddd;
+
+		}
+		.menu-bar:after {
+			clear : both;
+			content : '';
+			display : table;
+		}
+		.menu-bar > li {
+			float : left;
+
+		}
+		.menu-bar > li > a {
+			display : inline-block;
+			padding : 12px 24px;
+		}
+		.level-2-menu {
+			float : left;
+		}
+		.level-2-menu > li > a {
+			background-color : #eee;
+			border-bottom : solid 1px #666;
+			padding : 12px 24px;
+			width : 200px;
+			display : inline-block;
+		}
+		.level-3-menu {
+			float : left;
+		}
+		.level-3-menu > li > a {
+			background-color : #eee;
+			border-bottom : solid 1px #ddd;
+			padding : 12px 24px;
+			width : 200px;
+			display : inline-block;
+		}
+
+		[data-menu] {
+			opacity : 0;
+
+		}
+
+		[data-menu].is-active {
+			opacity : 1;
+		}
+	</style>
+	</head>
+<body>
+
+	<ul data-menu='level1' data-orientation='horizontal' id='root' class='menu-bar is-active'>
+		<li><a href='#beta'>beta</a></li>
+		<li><a href='#artists'>artists</a></li>
+		<li><a href='/generic-page.html'>love</a></li>
+		<li><a href='/generic-page.html'>porridge</a></li>
+		<li><a href='/generic-page.html'>oats</a></li>
+	</ul>
+
+	<ul data-menu='level2' data-orientation='vertical' data-parent='root' id="beta" class='level-2-menu'>
+		<li><a href='#gamma'>blah</a></li>
+		<li><a href='#delta'>blah</a></li>
+		<li><a href='/generic-page.html'>blah</a></li>
+	</ul>
+
+	<ul data-menu='level3' data-orientation='vertical' data-parent='beta' id="gamma" class='level-3-menu'>
+		<li><a href='/generic-page.html'>Lincoln</a></li>
+		<li><a href='/generic-page.html'>Washington</a></li>
+		<li><a href='/generic-page.html'>Rooseveldt</a></li>
+	</ul>
+
+	<ul data-menu='level3' data-orientation='vertical' data-parent='beta' id="delta" class='level-3-menu'>
+		<li><a href='/generic-page.html'>apple</a></li>
+		<li><a href='/generic-page.html'>orange</a></li>
+		<li><a href='/generic-page.html'>banan</a></li>
+	</ul>
+
+<script src='/src/utils.js'></script>
+<script src='/src/common.js'></script>
+<script src='/src/key-nav.js'></script>
+<script src='/src/mouse-nav.js'></script>
+</body>
+</html>
