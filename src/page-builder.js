@@ -34,7 +34,7 @@ function extend(Parent, Child) {
 	F.prototype = Parent.prototype;
 	Child.prototype = new F();
 	Child._Parent = Parent;
-};
+}
 
 function passThrough(arg) { return arg; }
 ////////////////////////////
@@ -52,7 +52,7 @@ MenuElement.prototype.build = function (interceptor) {
 		});
 	}
 	return frag;
-}
+};
 
 MenuElement.prototype.resetContext = function () {
 	if(this._parentContext) {
@@ -99,14 +99,14 @@ Submenu.prototype.items = function (id, cl, orientation) {
 	this._children[0] = items;
 	items._parentContext = this;
 	return items;
-}
+};
 
 function wrapElement(wrapperType) {
 	return function (el) {
 		var wrapper = document.createElement(wrapperType);
   	wrapper.appendChild(el);
   	return wrapper;
-	}
+	};
 }
 
 Submenu.prototype.build = function(){
@@ -199,7 +199,7 @@ Menu.prototype.bar = function(id) {
 	this._children[0] = bar;
 	bar._parentContext = this;
 	return bar;
-}
+};
 
 Menu.prototype.build = function () {
 	var menuRoot = createMenuRoot();
@@ -213,8 +213,6 @@ Menu.prototype.build = function () {
 function menu(id) {
 	return new Menu(id);
 }
-
-
 
 var container = document.getElementById('container');
 
@@ -245,7 +243,7 @@ var men = menu('foo')
 										.link('/generic-page.html', 'rugby')
 										.link('/generic-page.html', 'tennis')
 								.resetContextTwice()
-						.resetContextTwice()
+						.resetContextTwice();
 
 container.appendChild(men.build());
 

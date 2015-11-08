@@ -10,13 +10,15 @@ mousenav.mouseLeaveMenu = function(event) {
 		common.deactivateMenu(menu);
 	},450);
 	menu.setAttribute('data-timput-id', timeoutId);
-}
+};
 
 mousenav.mouseEnterMenu = function(event) {
 	var menu = event.currentTarget;
 	var timeoutId = menu.getAttribute('data-timput-id');
-	timeoutId && clearTimeout(timeoutId);
-}
+	if(timeoutId) {
+		clearTimeout(timeoutId);
+	}
+};
 
 mousenav.bindMouseEventsToMenu = function (menu) {
 	var triggers = utils.searchBetween(menu,'[data-trigger]','[data-menu]');
@@ -26,7 +28,7 @@ mousenav.bindMouseEventsToMenu = function (menu) {
 };
 
 mousenav.init = function (menu) {
-	mousenav.bindMouseEventsToMenu(menu)
+	mousenav.bindMouseEventsToMenu(menu);
 };
 
 mousenav.run = function () {
@@ -34,4 +36,4 @@ mousenav.run = function () {
 	menus.forEach(mousenav.init);
 };
 
-mousenav.run()
+mousenav.run();

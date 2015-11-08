@@ -23,9 +23,10 @@ function navigateUpwards(el) {
 
 function navigateTo(trigger) {
 	var menu = getTargetMenu(trigger);
-	menu && common.activateMenu(menu);
-	common.putFocusInFirstField(menu);
-
+	if(menu) {
+	 	common.activateMenu(menu);
+	 	common.putFocusInFirstField(menu);
+	}
 }
 
 function cycleBack(trigger) {
@@ -54,20 +55,18 @@ function setOnKeyUpHandler(event) {
 	var orientation = common.getOrientation(el);
 
 	if(common.isRoot(el)) {
-		console.log('is root')
 		common.putFocusInFirstField(el);
 	}
 
 	switch(event.which) {
 		case SPACE :
-			navigateTo(el)
+			navigateTo(el);
 			break;
 		case ESCAPE:
 			navigateUpwards(el);
 			break;
 		case ENTER :
-			console.log('enter')
-			navigateTo(el)
+			navigateTo(el);
 			break;
 		case LEFT_ARROW :
 			if(orientation == HORIZONTAL) {
@@ -109,7 +108,7 @@ function bindKeyEventsToFocusable(focusable) {
 }
 
 function init(focusable){
-	bindKeyEventsToFocusable(focusable)
+	bindKeyEventsToFocusable(focusable);
 }
 
 function run() {

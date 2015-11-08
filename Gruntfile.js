@@ -6,7 +6,8 @@ module.exports = function(grunt) {
       options: {
         globals: {
 
-        }
+        },
+        ignores : ['src/polyfills.js']
       }
     },
     watch: {

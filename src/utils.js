@@ -4,11 +4,11 @@ var utils = utils || {};
 
 	var modernListener = function(el, event, handler) {
 		el.addEventListener(event, handler, false);
-	}
+	};
 
 	var modernRemoveListener = function(el, event, handler) {
 		el.removeEventListener(event, handler, false);
-	}
+	};
 
 	var legacyListener = function(el, event, handler) {
 		el.attachEvent('on'+ event, function(e) {
@@ -16,11 +16,11 @@ var utils = utils || {};
 					e.which = e.keyCode;
 					handler(e);
 			});
-	}
+	};
 
 	var legacyRemoveListener = function (el, event, handler) {
 		el.detachEvent('on' + event, handler);
-	}
+	};
 
 	function modernStopPropagation(event) {
 		event.stopPropagation();
@@ -58,7 +58,7 @@ var utils = utils || {};
       arr[i] = nodes[i];
     }
     return arr;
-	}
+	};
 
 	utils.getFirstElementChild = function(element) {
 		if(element.firstElementChild) {
@@ -67,7 +67,7 @@ var utils = utils || {};
 			return findNextSiblingElement(element.firstChild);
 
 		}
-	}
+	};
 
 	utils.getLastElementChild = function(element) {
 		if(element.lastElementChild) {
@@ -76,7 +76,7 @@ var utils = utils || {};
 		//todo: browsers > 1e8 will still come here if there is no lastElementchild
 			return findPreviousSiblingElement(element.lastChild);
 		}
-	}
+	};
 
 	utils.getPreviousElementSibling = function(element) {
 		if(element.previousElementSibling) {
@@ -84,7 +84,7 @@ var utils = utils || {};
 		} else {
 			return findPreviousSiblingElement(element.previousSibling);
 		}
-	}
+	};
 
 	utils.getNextElementSibling = function(element) {
 		if(element.nextElementSibling) {
@@ -92,7 +92,7 @@ var utils = utils || {};
 		} else {
 			return findNextSiblingElement(element.nextSibling);
 		}
-	}
+	};
 
 	utils.searchAncestorElements = function sae (descendent, selector){
 		var parent = descendent.parentNode;
@@ -102,7 +102,7 @@ var utils = utils || {};
 		} else {
 			return sae(parent, selector);
 		}
-	}
+	};
 
 	utils.searchBetween = function(el, target, sentinel) {
 		var captured = [];
@@ -119,17 +119,17 @@ var utils = utils || {};
 
 	utils.toLowerCase = function(obj) {
 		return (obj + '').toLowerCase();
-	}
+	};
 
 	utils.toUpperCase = function(obj) {
 		return (obj + '').toUpperCase();
-	}
+	};
 
 	utils.bindHandler = function (event, handler) {
 		return function(element) {
 			utils.addListener(element, event, handler);
-		}
-	}
+		};
+	};
 
 	function findNextSiblingElement(node) {
 		if(!node) {
@@ -147,7 +147,7 @@ var utils = utils || {};
 		} else if(node.nodeType == 1) {
 			return node;
 		} else {
-			return findPreviousSiblingElement(node.previousSibling)
+			return findPreviousSiblingElement(node.previousSibling);
 		}
 	}
 

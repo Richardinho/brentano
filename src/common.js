@@ -2,11 +2,11 @@ var common = {};
 
 common.getMenus = function () {
 	return utils.toArray(document.querySelectorAll('[data-menu]'));
-}
+};
 
 common.getFocusables = function() {
 	return utils.toArray(document.querySelectorAll('[tabindex]'));
-}
+};
 
 common.activateMenu = function(menu) {
 	menu.classList.add('is-active');
@@ -29,4 +29,4 @@ common.putFocusInFirstField = function (menu){
 	var items = menu.querySelector('[data-menu-items]');
 	var firstItem = utils.getFirstElementChild(items);
 	firstItem.querySelector('[tabindex]').focus();
-}
+};
