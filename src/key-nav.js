@@ -116,4 +116,3 @@ function run() {
 	focusables.forEach(init);
 }
 
-run();

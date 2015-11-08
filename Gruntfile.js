@@ -8,6 +8,7 @@ module.exports = function(grunt) {
 
         },
         ignores : ['src/polyfills.js']
+
       }
     },
     watch: {
@@ -18,7 +19,8 @@ module.exports = function(grunt) {
       tests: {
         src: 'src/**/*.js',
         options: {
-          specs: 'test/*.spec.js'
+          specs: 'test/*.spec.js',
+          keepRunner : true
         }
       }
     }
@@ -28,6 +30,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
 
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('default', ['jshint', 'jasmine']);
 
 };

@@ -36,4 +36,4 @@ mousenav.run = function () {
 	menus.forEach(mousenav.init);
 };
 
-mousenav.run();
+//mousenav.run();

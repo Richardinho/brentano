@@ -94,6 +94,7 @@ var utils = utils || {};
 		}
 	};
 
+	//  unit tested
 	utils.searchAncestorElements = function sae (descendent, selector){
 		var parent = descendent.parentNode;
 		if(parent === null) { return false; }
@@ -117,10 +118,12 @@ var utils = utils || {};
 		return captured;
 	};
 
+	//  unit tested
 	utils.toLowerCase = function(obj) {
 		return (obj + '').toLowerCase();
 	};
 
+	//  unit tested
 	utils.toUpperCase = function(obj) {
 		return (obj + '').toUpperCase();
 	};

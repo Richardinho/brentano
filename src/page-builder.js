@@ -1,4 +1,3 @@
-var structure;
 
 function createMenuRoot() {
 
@@ -26,14 +25,12 @@ function createMenuList(listItems){
 	return list;
 }
 
-
-//
-
 function extend(Parent, Child) {
 	var F = function () {};
 	F.prototype = Parent.prototype;
 	Child.prototype = new F();
 	Child._Parent = Parent;
+	Child.prototype.constructor = Child;
 }
 
 function passThrough(arg) { return arg; }
@@ -186,7 +183,6 @@ Bar.prototype.build = function () {
 };
 
 
-//////
 
 function Menu(id) {
 	this.id = id;
@@ -213,39 +209,6 @@ Menu.prototype.build = function () {
 function menu(id) {
 	return new Menu(id);
 }
-
-var container = document.getElementById('container');
-
-var men = menu('foo')
-						.bar('my bar') // bar is a special sort of submenu
-							.items('bar items',['menu-bar-items'], 'horizontal')  // is a list of items
-								.submenu('fruit', ['sub-menu'])  //  submenu is a type of item
-									.items('fruit items', ['sub-menu-items'], 'vertical')
-										.link('#booya', 'booya')
-										.link('/generic-page.html', 'generic')
-								.resetContextTwice()
-								.submenu('art', ['sub-menu'])
-									.items('', ['sub-menu-items'], 'vertical')
-										.link('/generic-page.html', 'painting')
-										.link('/generic-page.html', 'sculpture')
-										.link('/generic-page.html', 'architecture')
-										.link('/generic-page.html', 'stained glass')
-										.link('/generic-page.html', 'illustration')
-								.resetContextTwice()
-								.submenu('sport', ['sub-menu'])
-									.items('', ['sub-menu-items'], 'vertical')
-										.submenu('computers', ['computer-menu'])  //  submenu is a type of item
-											.items('', ['computer-menu-items'], 'vertical')
-												.link('#booya', 'Javascript')
-												.link('/generic-page.html', 'Java')
-										.resetContextTwice()
-										.link('/generic-page.html', 'football')
-										.link('/generic-page.html', 'rugby')
-										.link('/generic-page.html', 'tennis')
-								.resetContextTwice()
-						.resetContextTwice();
-
-container.appendChild(men.build());
 
 
 
