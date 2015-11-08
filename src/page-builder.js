@@ -4,7 +4,7 @@ function createMenuRoot() {
 
 	var element = document.createElement('div');
 	element.setAttribute('tabindex', 0); // make focusable and within the natural page tabbing order
-	element.setAttribute('data-menu-root', '');
+	element.setAttribute('data-menu', 'root');
 	return element;
 
 }
@@ -84,9 +84,10 @@ Item.prototype.build = function(){
 
 ///////////////////////
 
-function Submenu(name) {
+function Submenu(name, classList) {
 	this.name = name;
 	this._children = [];
+	this._classList = classList || [];
 }
 
 extend(MenuElement, Submenu);
@@ -109,6 +110,9 @@ function wrapElement(wrapperType) {
 
 Submenu.prototype.build = function(){
 	var menu = document.createElement('div');
+	menu.setAttribute('data-menu','');
+	DOMTokenList.prototype.add.apply(menu.classList, this._classList);
+
 	var trigger = document.createElement('span');
 	trigger.appendChild(document.createTextNode(this.name));
 	trigger.setAttribute('data-trigger','');
@@ -145,13 +149,13 @@ Link.prototype.build = function () {
 function Items(id, cl) {
 	this.id = id;
 	this._children = [];
-	this._classes = (cl || []).concat(['menu-items']);
+	this._classes = (cl || []);
 
 }
 extend(MenuElement, Items);
 
-Items.prototype.submenu = function (name) {
-	var submenu = new Submenu(name);
+Items.prototype.submenu = function (name, classList) {
+	var submenu = new Submenu(name, classList);
 	this._children.push(submenu);
 	submenu._parentContext = this;
 	return submenu;
@@ -164,7 +168,7 @@ Items.prototype.link = function (href,text) {
 
 Items.prototype.build = function(){
 	var list = document.createElement('ul');
-
+	list.setAttribute('data-menu-items','');
 	DOMTokenList.prototype.add.apply(list.classList, this._classes);
 
 	list.appendChild(Items._Parent.prototype.build.call(this, wrapElement('li')));
@@ -216,14 +220,26 @@ var container = document.getElementById('container');
 
 var men = menu('foo')
 						.bar('my bar') // bar is a special sort of submenu
-							.items('bar items',['hello','world'])  // is a list of items
-								.submenu('fruit')  //  submenu is a type of item
-									.items('fruit items')
+							.items('bar items',['menu-bar-items'])  // is a list of items
+								.submenu('fruit', ['sub-menu'])  //  submenu is a type of item
+									.items('fruit items', ['sub-menu-items'])
 										.link('#booya', 'booya')
 										.link('/generic-page.html', 'generic')
 								.resetContextTwice()
-								.link('/generic-page.html','beta') //  trigger is a type of item
-								.link('/generic-page.html','gamma')
+								.submenu('art', ['sub-menu'])
+									.items('', ['sub-menu-items'])
+										.link('/generic-page.html', 'painting')
+										.link('/generic-page.html', 'sculpture')
+										.link('/generic-page.html', 'architecture')
+										.link('/generic-page.html', 'stained glass')
+										.link('/generic-page.html', 'illustration')
+								.resetContextTwice()
+								.submenu('sport', ['sub-menu'])
+									.items('', ['sub-menu-items'])
+										.link('/generic-page.html', 'football')
+										.link('/generic-page.html', 'rugby')
+										.link('/generic-page.html', 'tennis')
+								.resetContextTwice()
 						.resetContextTwice()
 
 container.appendChild(men.build());

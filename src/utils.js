@@ -104,6 +104,19 @@ var utils = utils || {};
 		}
 	}
 
+	utils.searchBetween = function(el, target, sentinel) {
+		var captured = [];
+		if(el.matches(target)) {
+			captured.push(el);
+		}
+		el = utils.getFirstElementChild(el);
+		while(el && !el.matches(sentinel) ) {
+			captured = captured.concat(utils.searchBetween(el, target, sentinel));
+			el = findNextSiblingElement(el.nextSibling);
+		}
+		return captured;
+	};
+
 	utils.toLowerCase = function(obj) {
 		return (obj + '').toLowerCase();
 	}

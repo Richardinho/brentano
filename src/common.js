@@ -5,7 +5,7 @@ common.getMenus = function () {
 }
 
 common.getTriggers = function(menu) {
-	return utils.toArray(menu.querySelectorAll('a'));
+	return utils.toArray(menu.querySelectorAll('[data-trigger]'));
 }
 
 common.activateMenu = function(menu, focus) {
@@ -23,8 +23,8 @@ common.getRootMenu = function () {
 	return document.querySelector('[data-menu=level1]');
 };
 
-common.isRoot = function (menu) {
-	return menu.hasAttribute('data-menu') && (menu.getAttribute('data-menu') == 'level1');
+common.isRoot = function (menu, rootname) {
+	return menu.hasAttribute('data-menu') && (menu.getAttribute('data-menu') == (rootname || 'level1'));
 };
 
 common.deactivateMenu = function (menu) {
