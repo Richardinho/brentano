@@ -84,17 +84,18 @@ Item.prototype.build = function(){
 
 ///////////////////////
 
-function Submenu(name, classList) {
+function Submenu(name, classList, orientation) {
 	this.name = name;
 	this._children = [];
 	this._classList = classList || [];
+	this._orientation = orientation || 'horizontal';
 }
 
 extend(MenuElement, Submenu);
 
-Submenu.prototype.items = function (id, cl) {
+Submenu.prototype.items = function (id, cl, orientation) {
 
-	var items = new Items(id, cl);
+	var items = new Items(id, cl, orientation);
 	this._children[0] = items;
 	items._parentContext = this;
 	return items;
@@ -116,6 +117,7 @@ Submenu.prototype.build = function(){
 	var trigger = document.createElement('span');
 	trigger.appendChild(document.createTextNode(this.name));
 	trigger.setAttribute('data-trigger','');
+	trigger.setAttribute('tabindex', 0);
 	menu.appendChild(trigger);
 	menu.appendChild(Submenu._Parent.prototype.build.apply(this));
 	return menu;
@@ -132,7 +134,7 @@ extend(Item, Link);
 
 Link.prototype.build = function () {
 	var link = document.createElement('a');
-	link.setAttribute('data-link','');
+	link.setAttribute('tabindex', 0);
 	link.setAttribute('href', this.href);
 	var text = document.createTextNode(this.text);
 	link.appendChild(text);
@@ -141,15 +143,11 @@ Link.prototype.build = function () {
 };
 
 
-//////
-//
-
-
-
-function Items(id, cl) {
+function Items(id, cl, orientation) {
 	this.id = id;
 	this._children = [];
 	this._classes = (cl || []);
+	this._orientation = orientation;
 
 }
 extend(MenuElement, Items);
@@ -169,6 +167,7 @@ Items.prototype.link = function (href,text) {
 Items.prototype.build = function(){
 	var list = document.createElement('ul');
 	list.setAttribute('data-menu-items','');
+	list.setAttribute('data-orientation', this._orientation);
 	DOMTokenList.prototype.add.apply(list.classList, this._classes);
 
 	list.appendChild(Items._Parent.prototype.build.call(this, wrapElement('li')));
@@ -205,6 +204,7 @@ Menu.prototype.bar = function(id) {
 Menu.prototype.build = function () {
 	var menuRoot = createMenuRoot();
 	menuRoot.appendChild(Menu._Parent.prototype.build.apply(this));
+	menuRoot.setAttribute('tabindex', 0);
 	return menuRoot;
 };
 
@@ -220,14 +220,14 @@ var container = document.getElementById('container');
 
 var men = menu('foo')
 						.bar('my bar') // bar is a special sort of submenu
-							.items('bar items',['menu-bar-items'])  // is a list of items
+							.items('bar items',['menu-bar-items'], 'horizontal')  // is a list of items
 								.submenu('fruit', ['sub-menu'])  //  submenu is a type of item
-									.items('fruit items', ['sub-menu-items'])
+									.items('fruit items', ['sub-menu-items'], 'vertical')
 										.link('#booya', 'booya')
 										.link('/generic-page.html', 'generic')
 								.resetContextTwice()
 								.submenu('art', ['sub-menu'])
-									.items('', ['sub-menu-items'])
+									.items('', ['sub-menu-items'], 'vertical')
 										.link('/generic-page.html', 'painting')
 										.link('/generic-page.html', 'sculpture')
 										.link('/generic-page.html', 'architecture')
@@ -235,7 +235,12 @@ var men = menu('foo')
 										.link('/generic-page.html', 'illustration')
 								.resetContextTwice()
 								.submenu('sport', ['sub-menu'])
-									.items('', ['sub-menu-items'])
+									.items('', ['sub-menu-items'], 'vertical')
+										.submenu('computers', ['computer-menu'])  //  submenu is a type of item
+											.items('', ['computer-menu-items'], 'vertical')
+												.link('#booya', 'Javascript')
+												.link('/generic-page.html', 'Java')
+										.resetContextTwice()
 										.link('/generic-page.html', 'football')
 										.link('/generic-page.html', 'rugby')
 										.link('/generic-page.html', 'tennis')

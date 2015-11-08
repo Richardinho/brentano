@@ -2,76 +2,10 @@
 <html>
 <head>
 
-	<style>
-		ul {
-			list-style : none;
-		}
-		[data-menu] {
-			background-color : pink;
-		}
-		 a {
-			padding : 12px 24px;
-			background : lightblue;
-			display : inline-block;
-		}
-		[data-menu-trigger] {
-			padding : 12px 24px;
-			background : green;
-			display : inline-block;
-		}
-		[data-menu-items] {
-			display : none;
-		}
-		.isOpen > [data-menu-items] {
-			display : block;
-		}
-		#menu > [data-menu-items] {
-			display : block;
-		}
 
-
-	</style>
 </head>
 <body>
-<input type="text"/>
-<div tabindex="0" data-menu-root id="menu">
-	<ul data-menu-items>
-		<li data-menu>
-			<span id="start" data-menu-trigger="" tabindex="1" >alpha</span>
-			<ul data-menu-items>
-				<li data-menu>
-					<span tabindex="1" data-menu-trigger>one</span>
-					<ul data-menu-items >
-						<li><a tabindex="1" href='#orange'>orange</a></li>
-						<li><a tabindex="1" href='#pineapple'>pineapple</a></li>
-					</ul>
-				</li>
-				<li>
-					<a tabindex="1" href='#lettuce'>lettuce</a>
-				</li>
-			</ul>
-		</li>
-		<li>
-			<a tabindex="1" href='#banana'>banana</a>
-		</li>
-		<li>
-			<a tabindex="1" href='#carrot'>carrot</a>
-		</li>
-		<li>
-			<a tabindex="1" href='#leek'>leek</a>
-		</li>
-		<li>
-			<a tabindex="1" href='#tomato'>tomato</a>
-		</li>
-	</ul>
-</div>
-<input type="text"/>
-	<script type='text/javascript' src="/src/polyfills.js"></script>
-	<script type='text/javascript' src="/src/utils.js"></script>
-	<script type='text/javascript' src="/src/main.js"></script>
-	<script>
-		initMenu(document.querySelector('#menu'));
-		document.querySelector('#start').focus();
-	</script>
+<h1>Brentano</h1>
+<h2>Web page navigatin menu</h2>
 </body>
 </html>

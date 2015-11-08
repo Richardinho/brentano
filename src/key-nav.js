@@ -9,143 +9,112 @@ var DOWN_ARROW = 40;
 
 var HORIZONTAL = 'horizontal';
 
-function isTrigger(target) {
-	return target.matches('a');
-}
-
-function cycleBackwards() {
-	console.log('cycle back')
-}
-function cycleForwards() {
-	console.log('cycle for')
-}
-
-function getMenuIdFromTrigger(el) {
-
-}
-
-function navigateDownwards(el) {
-
-}
-
-function getMenuFromTrigger(el) {
-	return utils.searchAncestorElements(el, '[data-menu]');
+function getTargetMenu(trigger){
+	return utils.searchAncestorElements(trigger, '[data-menu]');
 }
 
 function navigateUpwards(el) {
-	var menu = getMenuFromTrigger(el);
-	var menuId = menu.id;
-	var parentId = menu.getAttribute('data-parent');
-	var parent = document.getElementById(parentId);
-	parent.querySelector("[href='#" + menuId + "']").focus();
+	var di = utils.searchAncestorElements(el, '[data-menu-items]');
+	var menu = utils.searchAncestorElements(di, '[data-menu]');
 	common.deactivateMenu(menu);
-}
-
-function navigateTo(el) {
-	var hash = common.getHashFromTrigger(el);
-	if(hash) {
-		common.activateMenu(document.querySelector(hash), true);
-	}
-}
-
-function setOnKeyUpHandler(orientation) {
-	return function onKeyUp(event) {
-		var el = event.target;
-		if(isTrigger(el)) {
-			switch(event.which) {
-				case SPACE :
-					navigateTo(el)
-					break;
-				case ESCAPE:
-					navigateUpwards(el);
-					break;
-				case ENTER :
-					navigateTo(el)
-					break;
-				case LEFT_ARROW :
-					if(orientation == HORIZONTAL) {
-						cycleBack(el);
-					} else {
-						navigateUpwards(el);
-					}
-					break;
-				case RIGHT_ARROW :
-					if(orientation == HORIZONTAL) {
-						cycleForwards(el);
-					} else {}
-					break;
-				case DOWN_ARROW :
-					if(orientation == HORIZONTAL) {
-						navigateDownwards(el);
-					} else {
-						cycleForwards(el);
-					}
-					break;
-				case UP_ARROW :
-					if(orientation == HORIZONTAL) {
-						navigateUpwards(el);
-					} else {
-						cycleBack(el);
-					}
-					break;
-				default :
-				// something else
-			}
-		}
-	}
-}
-
-function getMenuOrientation(menu) {
-	return menu.getAttribute('data-orientation') || HORIZONTAL;
-}
-
-function bindKeyEventsToMenu(menu) {
-	utils.addListener(menu, 'keyup', setOnKeyUpHandler(getMenuOrientation(menu)));
-	utils.addListener(menu, 'keydown', disableEvent());
-}
-
-function disableEvent(whitelist) {
-	var whitelist = whitelist || [];
-	return function(event) {
-		if(whitelist.indexOf(event.which) == -1) {
-			utils.preventDefault(event);
-			utils.stopPropagation(event);
-		}
-	};
-}
-
-function init(menu){
-	if(!(menu.getAttribute('data-menu') === 'level1')) {
-		menu.style.display = 'none';
-	}
-	bindKeyEventsToMenu(menu)
+	menu.querySelector('[data-trigger]').focus();
 }
 
 
+function navigateTo(trigger) {
+	var menu = getTargetMenu(trigger);
+	menu && common.activateMenu(menu);
+	common.putFocusInFirstField(menu);
 
-function run() {
-	var menus = common.getMenus();
-	menus.forEach(init);
-}
-
-function cycleForwards(trigger) {
-	var li = utils.searchAncestorElements(trigger, 'li');
-	var nextElement = utils.getNextElementSibling(li);
-	if(nextElement) {
-		nextElement.querySelector('a').focus();
-	} else {
-		utils.getFirstElementChild(li.parentNode).querySelector('a').focus();
-	}
 }
 
 function cycleBack(trigger) {
 	var li = utils.searchAncestorElements(trigger, 'li');
 	var previousElement = utils.getPreviousElementSibling(li);
 	if(previousElement) {
-		previousElement.querySelector('a').focus();
+		previousElement.querySelector('[tabindex]').focus();
 	} else {
-		utils.getLastElementChild(li.parentNode).querySelector('a').focus();
+		utils.getLastElementChild(li.parentNode).querySelector('[tabindex]').focus();
 	}
+}
+
+function cycleForwards(trigger) {
+	var li = utils.searchAncestorElements(trigger, 'li');
+	var nextElement = utils.getNextElementSibling(li);
+	if(nextElement) {
+		nextElement.querySelector('[tabindex]').focus();
+	} else {
+		utils.getFirstElementChild(li.parentNode).querySelector('[tabindex]').focus();
+	}
+}
+
+function setOnKeyUpHandler(event) {
+	var el = event.currentTarget;
+	event.stopPropagation();
+	var orientation = common.getOrientation(el);
+
+	if(common.isRoot(el)) {
+		console.log('is root')
+		common.putFocusInFirstField(el);
+	}
+
+	switch(event.which) {
+		case SPACE :
+			navigateTo(el)
+			break;
+		case ESCAPE:
+			navigateUpwards(el);
+			break;
+		case ENTER :
+			console.log('enter')
+			navigateTo(el)
+			break;
+		case LEFT_ARROW :
+			if(orientation == HORIZONTAL) {
+				cycleBack(el);
+			} else {
+				navigateUpwards(el);
+			}
+			break;
+		case RIGHT_ARROW :
+			if(orientation == HORIZONTAL) {
+				cycleForwards(el);
+			} else {
+				navigateTo(el);
+			}
+			break;
+		case DOWN_ARROW :
+			if(orientation == HORIZONTAL) {
+				navigateTo(el);
+			} else {
+				cycleForwards(el);
+			}
+			break;
+		case UP_ARROW :
+			if(orientation == HORIZONTAL) {
+				navigateUpwards(el);
+			} else {
+				cycleBack(el);
+			}
+			break;
+		default :
+		// something else
+	}
+
+}
+
+function bindKeyEventsToFocusable(focusable) {
+	utils.addListener(focusable, 'keyup', setOnKeyUpHandler);
+	//utils.addListener(trigger, 'keydown', disableEvent());
+}
+
+function init(focusable){
+	bindKeyEventsToFocusable(focusable)
+}
+
+function run() {
+	var focusables = common.getFocusables();
+	focusables.forEach(init);
 }
 
 run();

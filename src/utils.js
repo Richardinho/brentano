@@ -97,7 +97,7 @@ var utils = utils || {};
 	utils.searchAncestorElements = function sae (descendent, selector){
 		var parent = descendent.parentNode;
 		if(parent === null) { return false; }
-		if(parent.matches(selector)) {
+		if(parent.matches && parent.matches(selector)) {
 			return parent;
 		} else {
 			return sae(parent, selector);
