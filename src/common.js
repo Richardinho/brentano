@@ -4,6 +4,13 @@ common.getMenus = function () {
 	return utils.toArray(document.querySelectorAll('[data-menu]'));
 };
 
+common.closeActiveMenu = function(){
+	var activeMenu = document.querySelector('.is-active');
+	if(activeMenu) {
+		common.deactivateMenu(activeMenu);
+	}
+};
+
 common.getFocusables = function() {
 	return utils.toArray(document.querySelectorAll('[tabindex]'));
 };

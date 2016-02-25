@@ -21,9 +21,7 @@
 			background : green;
 			padding : 12px 24px;
 			cursor : pointer;
-
 		}
-
 
 		.sub-menu-items {
 			position : absolute;
@@ -45,7 +43,6 @@
 		}
 
 		.computer-menu-items {
-
 			position : absolute;
 			top : 0;
 			left : 100%;
@@ -59,14 +56,12 @@
 			display : inline-block;
 		}
 
-
 		.computer-menu-items > li  > a {
 			padding : 12px 24px;
 			display : inline-block;
 			cursor : pointer;
 			width : 100%;
 			background-color : lightblue;
-
 		}
 	</style>
 </head>
@@ -78,10 +73,20 @@
 
 </p>
 
+<script>
 
+</script>
 <script src='/src/utils.js'></script>
 <script src='/src/common.js'></script>
-<script src='/src/page-builder.js'></script>
+<script src='/src/page-builder/utils.js'></script>
+<script src='/src/page-builder/menu-element.js'></script>
+<script src='/src/page-builder/item.js'></script>
+<script src='/src/page-builder/link.js'></script>
+<script src='/src/page-builder/submenu.js'></script>
+<script src='/src/page-builder/items.js'></script>
+<script src='/src/page-builder/bar.js'></script>
+<script src='/src/page-builder/menu.js'></script>
+
 <script src='/src/key-nav.js'></script>
 <script src='/src/mouse-nav.js'></script>
 
@@ -90,41 +95,41 @@
 
 var container = document.getElementById('container');
 
-var men = menu('foo')
-						.bar('my bar') // bar is a special sort of submenu
-							.items('bar items',['menu-bar-items'], 'horizontal')  // is a list of items
-								.submenu('fruit', ['sub-menu'])  //  submenu is a type of item
-									.items('fruit items', ['sub-menu-items'], 'vertical')
-										.link('#booya', 'booya')
-										.link('/generic-page.html', 'generic')
-								.resetContextTwice()
-								.submenu('art', ['sub-menu'])
-									.items('', ['sub-menu-items'], 'vertical')
-										.link('/generic-page.html', 'painting')
-										.link('/generic-page.html', 'sculpture')
-										.link('/generic-page.html', 'architecture')
-										.link('/generic-page.html', 'stained glass')
-										.link('/generic-page.html', 'illustration')
-								.resetContextTwice()
-								.submenu('sport', ['sub-menu'])
-									.items('', ['sub-menu-items'], 'vertical')
-										.submenu('computers', ['computer-menu'])  //  submenu is a type of item
-											.items('', ['computer-menu-items'], 'vertical')
-												.link('#booya', 'Javascript')
-												.link('/generic-page.html', 'Java')
-										.resetContextTwice()
-										.link('/generic-page.html', 'football')
-										.link('/generic-page.html', 'rugby')
-										.link('/generic-page.html', 'tennis')
-								.resetContextTwice()
-						.resetContextTwice();
+var men = new Brentano.Menu('foo')
+	.bar('my bar') // bar is a special sort of submenu
+		.items('bar items',['menu-bar-items'], 'horizontal')  // is a list of items
+			.submenu('fruit', ['sub-menu'])  //  submenu is a type of item
+				.items('fruit items', ['sub-menu-items'], 'vertical')
+					.link('#booya', 'booya')
+					.link('/generic-page.html', 'generic')
+			.resetContextTwice()
+			.submenu('art', ['sub-menu'])
+				.items('', ['sub-menu-items'], 'vertical')
+					.link('/generic-page.html', 'painting')
+					.link('/generic-page.html', 'sculpture')
+					.link('/generic-page.html', 'architecture')
+					.link('/generic-page.html', 'stained glass')
+					.link('/generic-page.html', 'illustration')
+			.resetContextTwice()
+			.submenu('sport', ['sub-menu'])
+				.items('', ['sub-menu-items'], 'vertical')
+					.submenu('computers', ['computer-menu'])  //  submenu is a type of item
+						.items('', ['computer-menu-items'], 'vertical')
+							.link('#booya', 'Javascript')
+							.link('/generic-page.html', 'Java')
+					.resetContextTwice()
+					.link('/generic-page.html', 'football')
+					.link('/generic-page.html', 'rugby')
+					.link('/generic-page.html', 'tennis')
+			.resetContextTwice()
+	.resetContextTwice();
 
 container.appendChild(men.build());
 
 
-mousenav.run();
+Brentano.attachMouseBindings();
+Brentano.attachKeyboardBindings();
 
-run(); //  keyboard bindings
 </script>
 
 </body>

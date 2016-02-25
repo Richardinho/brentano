@@ -1,24 +1,28 @@
 var utils = utils || {};
 
-(function () {
++function () {
 
-	var modernListener = function(el, event, handler) {
+	//todo get rid of ie8 crap
+
+	'use strict';
+
+	function modernListener(el, event, handler) {
 		el.addEventListener(event, handler, false);
 	};
 
-	var modernRemoveListener = function(el, event, handler) {
+	function modernRemoveListener(el, event, handler) {
 		el.removeEventListener(event, handler, false);
 	};
 
-	var legacyListener = function(el, event, handler) {
+	function legacyListener(el, event, handler) {
 		el.attachEvent('on'+ event, function(e) {
-					e.target = e.srcElement;
-					e.which = e.keyCode;
-					handler(e);
-			});
+			e.target = e.srcElement;
+			e.which = e.keyCode;
+			handler(e);
+		});
 	};
 
-	var legacyRemoveListener = function (el, event, handler) {
+	function legacyRemoveListener (el, event, handler) {
 		el.detachEvent('on' + event, handler);
 	};
 
@@ -53,11 +57,11 @@ var utils = utils || {};
 //  ie8 doesn't not support treating node list as a js object
 //  so Array.prototype.slice.apply() will not work
 	utils.toArray = function(nodes) {
-	  var arr = [];
-    for (var i=0; i<nodes.length; i++){
-      arr[i] = nodes[i];
-    }
-    return arr;
+		var arr = [];
+		for (var i=0; i<nodes.length; i++){
+			arr[i] = nodes[i];
+		}
+		return arr;
 	};
 
 	utils.getFirstElementChild = function(element) {
@@ -65,7 +69,6 @@ var utils = utils || {};
 			return element.firstElementChild;
 		} else {
 			return findNextSiblingElement(element.firstChild);
-
 		}
 	};
 
@@ -95,28 +98,32 @@ var utils = utils || {};
 	};
 
 	//  unit tested
-	utils.searchAncestorElements = function sae (descendent, selector){
+	function searchAncestorElements (descendent, selector){
 		var parent = descendent.parentNode;
 		if(parent === null) { return false; }
 		if(parent.matches && parent.matches(selector)) {
 			return parent;
 		} else {
-			return sae(parent, selector);
+			return searchAncestorElements(parent, selector);
 		}
 	};
+	utils.searchAncestorElements = searchAncestorElements;
 
-	utils.searchBetween = function(el, target, sentinel) {
+
+
+	function searchBetween(el, target, sentinel) {
 		var captured = [];
 		if(el.matches(target)) {
 			captured.push(el);
 		}
 		el = utils.getFirstElementChild(el);
 		while(el && !el.matches(sentinel) ) {
-			captured = captured.concat(utils.searchBetween(el, target, sentinel));
+			captured = captured.concat(searchBetween(el, target, sentinel));
 			el = findNextSiblingElement(el.nextSibling);
 		}
 		return captured;
 	};
+	utils.searchBetween = searchBetween;
 
 	//  unit tested
 	utils.toLowerCase = function(obj) {
@@ -143,6 +150,7 @@ var utils = utils || {};
 			return findNextSiblingElement(node.nextSibling);
 		}
 	}
+	utils.findNextSiblingElement = findNextSiblingElement;
 
 	function findPreviousSiblingElement(node) {
 		if(!node) {
@@ -153,5 +161,6 @@ var utils = utils || {};
 			return findPreviousSiblingElement(node.previousSibling);
 		}
 	}
+	utils.findPreviousSiblingElement = findPreviousSiblingElement;
 
-}());
+}();

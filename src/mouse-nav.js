@@ -1,39 +1,45 @@
-var mousenav = {};
+var Brentano = Brentano || {};
 
-mousenav.mouseEnterTrigger = function(menu){
-	common.activateMenu(menu);
-};
++function() {
 
-mousenav.mouseLeaveMenu = function(event) {
-	var menu = event.currentTarget;
-	var timeoutId = setTimeout(function(){
-		common.deactivateMenu(menu);
-	},450);
-	menu.setAttribute('data-timput-id', timeoutId);
-};
+	'use strict';
 
-mousenav.mouseEnterMenu = function(event) {
-	var menu = event.currentTarget;
-	var timeoutId = menu.getAttribute('data-timput-id');
-	if(timeoutId) {
-		clearTimeout(timeoutId);
-	}
-};
+	function mouseEnterTrigger(menu){
+		if(!utils.searchAncestorElements(menu, '.is-active')) {
+			common.closeActiveMenu();
+		}
+		common.activateMenu(menu);
+	};
 
-mousenav.bindMouseEventsToMenu = function (menu) {
-	var triggers = utils.searchBetween(menu,'[data-trigger]','[data-menu]');
-	triggers.forEach(utils.bindHandler('mouseenter', mousenav.mouseEnterTrigger.bind(null, menu)));
-	utils.addListener(menu, 'mouseleave', mousenav.mouseLeaveMenu);
-	utils.addListener(menu, 'mouseenter', mousenav.mouseEnterMenu);
-};
+	function mouseLeaveMenu(event) {
+		var menu = event.currentTarget;
+		var timeoutId = setTimeout(function(){
+			common.deactivateMenu(menu);
+		},450);
+		menu.setAttribute('data-timput-id', timeoutId);
+	};
 
-mousenav.init = function (menu) {
-	mousenav.bindMouseEventsToMenu(menu);
-};
+	function mouseEnterMenu(event) {
+		var menu = event.currentTarget;
+		var timeoutId = menu.getAttribute('data-timput-id');
+		if(timeoutId) {
+			clearTimeout(timeoutId);
+		}
+	};
 
-mousenav.run = function () {
-	var menus = common.getMenus();
-	menus.forEach(mousenav.init);
-};
+	function bindMouseEventsToMenu (menu) {
+		var triggers = utils.searchBetween(menu,'[data-trigger]','[data-menu]');
+		triggers.forEach(utils.bindHandler('mouseenter', mouseEnterTrigger.bind(null, menu)));
+		utils.addListener(menu, 'mouseleave', mouseLeaveMenu);
+		utils.addListener(menu, 'mouseenter', mouseEnterMenu);
+	};
+
+	Brentano.attachMouseBindings = function () {
+		var menus = common.getMenus();
+		menus.forEach(bindMouseEventsToMenu);
+	};
+
+}();
+
 
 //mousenav.run();
